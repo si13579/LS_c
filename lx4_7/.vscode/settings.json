@@ -1,0 +1,8 @@
+{
+    "editor.fontFamily": "Inconsolata",
+    "files.associations": {
+        "cmath": "c",
+        "*.tcc": "c"
+    },
+    "code-runner.runInTerminal": true
+}

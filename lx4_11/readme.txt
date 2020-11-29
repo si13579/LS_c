@@ -1,0 +1,1 @@
+通过getline函数读入整个输入行，这种情况可以不使用getch与ungetch函数
