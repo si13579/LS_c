@@ -1,10 +1,19 @@
 #include "abc.h"
+int tokentype;
+char token[MAXTOKEN];
+//extern char name[MAXTOKEN];
+//extern char out[1000];
+//extern int prevtoken;
+int prevtoken = NO;
 int gettoken(void)  //返回下一个标记
 {
     int c,getch(void);
     void ungetch(int);
     char *p = token;
-
+    if (prevtoken == YES) {
+        prevtoken = NO;
+        return tokentype;
+    }
     while ((c = getch()) == ' ' || c == '\t')
         ;
     if (c == '(') {

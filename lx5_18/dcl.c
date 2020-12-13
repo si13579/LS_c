@@ -1,4 +1,9 @@
 #include "abc.h"
+char name[MAXTOKEN];
+extern char token[MAXTOKEN];
+extern int tokentype;
+extern char out[1000];
+extern int prevtoken;
 //dcl函数：对一个声明符进行语法分析
 void dcl(void)
 {
@@ -16,11 +21,11 @@ void dirdcl(void)
     if (tokentype == '(') {
         dcl();
         if (tokentype != ')')
-            printf("error: missing )\n");
+            errmsg("error: missing )\n");
     } else if (tokentype == NAME)
         strcpy(name, token);
     else 
-        printf("error: expected name or (dcl)\n");
+        errmsg("error: expected name or (dcl)\n");
     while ((type=gettoken()) == PARENS || type == BARCKETS)
         if (type == PARENS)
             strcat(out, " function returning");
@@ -29,4 +34,9 @@ void dirdcl(void)
             strcat(out, token);
             strcat(out, " of");
         }
+}
+void errmsg(char *msg)
+{
+    printf("%s", msg);
+    prevtoken = YES;
 }

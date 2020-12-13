@@ -1,5 +1,15 @@
 #include "abc.h"
+
+extern char token[MAXTOKEN];
+extern char name[MAXTOKEN];
+char out[1000];
+//extern int prevtoken;6
+//extern int tokentype;
+//extern char token[];
+//extern char out[];
+
 /*
+extern int tokentype;
 main()  //将声明转换为文字描述
 {
     while (gettoken() != EOF) {     //该行的第一个记号是数据类型
@@ -11,8 +21,9 @@ main()  //将声明转换为文字描述
         printf("%s: %s %s\n",name, out, datatype);
     }
     return 0;
-}       
-*/
+} 
+*/      
+
 main()
 {
     int type;
