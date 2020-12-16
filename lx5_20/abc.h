@@ -10,7 +10,7 @@ void dirdcl(void);
 int gettoken(void);
 int nexttoken(void);
 void errmsg(char *);
-
+void parmdcl(void);
 //int tokentype;              //最后一个记号的类型
 //char token[MAXTOKEN];       //最后一个记号字符串
 //char name[MAXTOKEN];        //标识符名

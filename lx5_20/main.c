@@ -8,7 +8,7 @@ char out[1000];
 //extern char token[];
 //extern char out[];
 
-/*
+
 extern int tokentype;
 main()  //将声明转换为文字描述
 {
@@ -22,8 +22,8 @@ main()  //将声明转换为文字描述
     }
     return 0;
 } 
-*/      
-
+      
+/*
 main()
 {
     int type;
@@ -47,3 +47,4 @@ main()
         printf("%s\n",out);
     }
 }
+*/
