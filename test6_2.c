@@ -14,15 +14,24 @@ struct point middle;
 struct point a;
 struct point makepoint(int, int);
 struct point addpoint(struct point p1,struct point p2);
+//struct point *pp;
+struct point origin, *pp = &origin;
+
 main(){
 screen.pt1 = makepoint(0, 0);
 screen.pt2 = makepoint(90, 90);
 middle = makepoint((screen.pt1.x + screen.pt2.x)/2, (screen.pt1.y + screen.pt2.y)/2);
 printf("%d\n",middle.x);
 printf("%d\n",middle.y);
+
 a = addpoint(middle,screen.pt2);
 printf("%d\n",a.x);
 printf("%d\n",a.y);
+
+origin = addpoint(middle,screen.pt2);
+//pp = &origin;
+//printf("origin is (%d,%d)\n",(*pp).x,(*pp).y);
+printf("origin is (%d,%d)\n",pp->x,pp->y);
 return 0;
 }
 struct point makepoint(int x, int y)
@@ -58,3 +67,14 @@ struct rect canonrect(struct rect r)
     temp.pt2.y = max(r.pt1.y,r.pt2.y);
     return temp;
 }
+
+
+/*
+运算符.和->都是从左至右结合的，所以，对于下面的声明：
+struct rect r, *rp = &r;
+一下4个表达式是等价的:
+r.pt1.x
+rp->.pt1.x
+(r.pt1).x
+(rp->pt1).x
+*/
