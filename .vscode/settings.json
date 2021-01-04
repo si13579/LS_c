@@ -2,6 +2,7 @@
     "files.associations": {
         "cstdlib": "c",
         "cctype": "c",
-        "*.tcc": "c"
+        "*.tcc": "c",
+        "typeinfo": "c"
     }
 }
