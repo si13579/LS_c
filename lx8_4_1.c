@@ -160,20 +160,59 @@ FILE _iob[OPEN_MAX] = {
     {0, (char *) 0, (char *) 0, _WRITE | _UNBUF, 2}
 };
 */
+
+int fseek(FILE *fp, long offset, int origin)
+{
+    unsigned nc;
+    long rc = 0;
+    if (fp->flag & _READ) {
+        if (origin == 1)
+            offset -= fp->cnt;
+        rc = lseek(fp->fd, offset, origin);
+        fp->cnt = 0;
+    } else if (fp->flag & _WRITE) {
+        if ((nc = fp->ptr - fp->base) > 0)
+            if (write(fp->fd, fp->base, nc) != nc)
+                rc = -1;
+        if (rc != -1)
+            rc = lseek(fp->fd, offset, origin);
+  
+    }
+     return (rc == -1) ? -1 : 0;
+}
+int get(FILE *fp,int fd, long pos, char *buf, int n);
 main()
 {
-    int a;
-    /*
-    FILE *fp1;
-    fp1 = fopen("000.txt","r");
-    a = getc(fp1);
-    putc(a,stdin);
-    */
-    //a = getchar();
-    //putchar(a);
-    //return 0;   
-     FILE *fp1;
-    fp1 = fopen("000.txt","r");
-    a = getc(fp1);
-    putc(a,stdin);
+    char buf[BUFSIZ];
+    int n;
+    FILE *fp;
+    int fd;
+    long a = 1L;  //a:文件任意位置
+    fp = fopen("000.txt","r");
+    fd = open("000.txt",O_RDONLY,0);
+    while ((n = get(fp,fd,a,buf,BUFSIZ)) > 0){ 
+        write(1, buf, n);
+        a += BUFSIZ;
+    }
+    close(fd);
+    return 0;
+}
+/*
+int get(int fd, long pos, char *buf, int n)
+{
+    if (lseek(fd, pos, 0) >= 0)
+        return read(fd, buf, n);
+    else 
+        return -1;
+}
+*/
+int get(FILE *fp,int fd, long pos, char *buf, int n)
+{
+    if (fseek(fp,pos,0) == 0){
+        if (lseek(fd, pos, 0) >= 0)
+            return read(fd, buf, n);
+    }
+    else 
+        return -1;
+     
 }
